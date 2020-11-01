@@ -1,6 +1,13 @@
 package com.nothing.airport.airportpl;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
@@ -30,11 +37,10 @@ class AirportController {
 
   @GetMapping("/airports")
   CollectionModel<EntityModel<Airport>> all() {
-  
-    List<EntityModel<Airport>> airports = repository.findAll().stream()
-        .map(assembler::toModel)
+
+    List<EntityModel<Airport>> airports = repository.findAll().stream().map(assembler::toModel)
         .collect(Collectors.toList());
-  
+
     return CollectionModel.of(airports, linkTo(methodOn(AirportController.class).all()).withSelfRel());
   }
 
@@ -48,10 +54,18 @@ class AirportController {
   @GetMapping("/airports/{id}")
   EntityModel<Airport> one(@PathVariable Long id) {
 
-    Airport employee = repository.findById(id) //
+    Airport airport = repository.findById(id) //
         .orElseThrow(() -> new AirportNotFoundException(id));
-  
-    return assembler.toModel(employee);
+
+    return assembler.toModel(airport);
+  }
+
+  @GetMapping("/airports/departures/{id}")
+  String getDepartures(@PathVariable Long id) {
+    Airport airport = repository.findById(id) //
+        .orElseThrow(() -> new AirportNotFoundException(id));
+    
+    return "";
   }
 
   @PutMapping("/airports/{id}")

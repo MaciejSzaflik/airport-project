@@ -7,16 +7,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-class Airport {
+public class Airport {
 
   private @Id @GeneratedValue Long id;
   private String name;
+  private String departuresUrl;
+  private String arivalsUrl;
 
   Airport() {}
 
-  Airport(String name) {
+  Airport(String name, String departuresUrl) {
 
     this.name = name;
+    this.departuresUrl = departuresUrl;
   }
 
   public Long getId() {
@@ -26,6 +29,14 @@ class Airport {
   public String getName() {
     return this.name;
   }
+  
+  public String getDeparturesUrl() {
+    return this.departuresUrl;
+  }
+
+  public String getArrivalsUrl() {
+    return this.arivalsUrl;
+  }
 
   public void setId(Long id) {
     this.id = id;
@@ -33,6 +44,14 @@ class Airport {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public void setDeparturesUrl(String departuresUrl) {
+    this.departuresUrl = departuresUrl;
+  }
+
+  public void setArivalsUrl(String arivalsUrl) {
+    this.arivalsUrl = arivalsUrl;
   }
 
   @Override

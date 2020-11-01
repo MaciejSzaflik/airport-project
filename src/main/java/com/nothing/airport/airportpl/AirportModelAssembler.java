@@ -14,6 +14,6 @@ class AirportModelAssembler implements RepresentationModelAssembler<Airport, Ent
 
     return EntityModel.of(employee, //
         linkTo(methodOn(AirportController.class).one(employee.getId())).withSelfRel(),
-        linkTo(methodOn(AirportController.class).all()).withRel("employees"));
+        linkTo(methodOn(AirportController.class).all()).withRel("airports"));
   }
 }

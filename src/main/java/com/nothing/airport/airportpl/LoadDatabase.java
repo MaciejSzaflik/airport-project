@@ -1,4 +1,5 @@
 package com.nothing.airport.airportpl;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -14,7 +15,10 @@ class LoadDatabase {
   CommandLineRunner initDatabase(AirportRepository repository) {
 
     return args -> {
-      log.info("Preloading " + repository.save(new Airport("Wroclaw")));
+      log.info("Preloading " + repository.save(
+        new Airport(
+          "Wroclaw", 
+          "http://airport.wroclaw.pl/admin/admin-ajax.php?lang=en&action=odloty")));
     };
   }
 }
