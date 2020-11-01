@@ -1,13 +1,6 @@
 package com.nothing.airport.airportpl;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
@@ -65,7 +58,7 @@ class AirportController {
     Airport airport = repository.findById(id) //
         .orElseThrow(() -> new AirportNotFoundException(id));
     
-    return "";
+    return airport.getName();
   }
 
   @PutMapping("/airports/{id}")

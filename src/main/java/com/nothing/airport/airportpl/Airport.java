@@ -12,14 +12,15 @@ public class Airport {
   private @Id @GeneratedValue Long id;
   private String name;
   private String departuresUrl;
-  private String arivalsUrl;
+  private String arrivalsUrl;
 
   Airport() {}
 
-  Airport(String name, String departuresUrl) {
+  Airport(String name, String departuresUrl, String arrivalsUrl) {
 
     this.name = name;
     this.departuresUrl = departuresUrl;
+    this.arrivalsUrl = arrivalsUrl;
   }
 
   public Long getId() {
@@ -35,7 +36,7 @@ public class Airport {
   }
 
   public String getArrivalsUrl() {
-    return this.arivalsUrl;
+    return this.arrivalsUrl;
   }
 
   public void setId(Long id) {
@@ -50,8 +51,8 @@ public class Airport {
     this.departuresUrl = departuresUrl;
   }
 
-  public void setArivalsUrl(String arivalsUrl) {
-    this.arivalsUrl = arivalsUrl;
+  public void setArrivalsUrl(String arrivalsUrl) {
+    this.arrivalsUrl = arrivalsUrl;
   }
 
   @Override

@@ -18,7 +18,8 @@ class LoadDatabase {
       log.info("Preloading " + repository.save(
         new Airport(
           "Wroclaw", 
-          "http://airport.wroclaw.pl/admin/admin-ajax.php?lang=en&action=odloty")));
+          "http://airport.wroclaw.pl/admin/admin-ajax.php?lang=en&action=odloty",
+          "http://airport.wroclaw.pl/admin/admin-ajax.php?lang=en&action=przyloty")));
     };
   }
 }
