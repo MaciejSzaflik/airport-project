@@ -3,6 +3,9 @@ package com.nothing.airport.airportpl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.nothing.airport.airportpl.flight.*;
+import com.nothing.airport.airportpl.parser.*;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import org.springframework.hateoas.CollectionModel;
@@ -54,11 +57,25 @@ class AirportController {
   }
 
   @GetMapping("/airports/departures/{id}")
-  String getDepartures(@PathVariable Long id) {
+  List<Departure> getDepartures(@PathVariable Long id) {
     Airport airport = repository.findById(id) //
         .orElseThrow(() -> new AirportNotFoundException(id));
     
-    return airport.getName();
+    Parser parser = ParserFactory.getParser(airport);
+    AirportRequester requester = RequesterFactory.getRequester(airport);
+
+    return parser.parserDepartures(requester.getDepartures(airport));
+  }
+
+  @GetMapping("/airports/arrivals/{id}")
+  List<Arrival> getArrivals(@PathVariable Long id) {
+    Airport airport = repository.findById(id) //
+        .orElseThrow(() -> new AirportNotFoundException(id));
+    
+    Parser parser = ParserFactory.getParser(airport);
+    AirportRequester requester = RequesterFactory.getRequester(airport);
+
+    return parser.parserArrivals(requester.getArrivals(airport));
   }
 
   @PutMapping("/airports/{id}")
