@@ -1,14 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import AirportList from './components/airport';
 
 import './index.css';
 
 const App = () => {
   return (
     <div>
-        <div>Welcome to my-webpack-react-starter</div>
+        <div>Airport List</div>
+        <AirportList />;
     </div>
+
   );
 };
 
-ReactDOM.render(<App />, document.querySelector('#react'));
+ReactDOM.render(
+  <App />, 
+  document.querySelector('#react')
+);

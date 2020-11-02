@@ -10,6 +10,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ class AirportController {
 
   // Aggregate root
 
+  @CrossOrigin
   @GetMapping("/airports")
   CollectionModel<EntityModel<Airport>> all() {
 
@@ -47,6 +49,7 @@ class AirportController {
 
   // Single item
 
+  @CrossOrigin
   @GetMapping("/airports/{id}")
   EntityModel<Airport> one(@PathVariable Long id) {
 
@@ -56,6 +59,7 @@ class AirportController {
     return assembler.toModel(airport);
   }
 
+  @CrossOrigin
   @GetMapping("/airports/departures/{id}")
   List<Departure> getDepartures(@PathVariable Long id) {
     Airport airport = repository.findById(id) //
@@ -67,6 +71,7 @@ class AirportController {
     return parser.parserDepartures(requester.getDepartures(airport));
   }
 
+  @CrossOrigin
   @GetMapping("/airports/arrivals/{id}")
   List<Arrival> getArrivals(@PathVariable Long id) {
     Airport airport = repository.findById(id) //
