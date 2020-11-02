@@ -18,10 +18,12 @@ public class WroclawParser implements Parser {
     
     List<Arrival> flights = new ArrayList<Arrival>();
     Elements rows = getRows(value,"table-przyloty mobile");
-    for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
+    for (int i = 1; i < rows.size(); i++) { 
       Element row = rows.get(i);
       Elements cols = row.select("td");
-      flights.add(arrivalFromElements(cols));
+      Arrival arr = arrivalFromElements(cols);
+      if(arr != null)
+        flights.add(arr);
     }
     return flights;
   }
@@ -44,9 +46,12 @@ public class WroclawParser implements Parser {
             flight.status = txt;
         }
       }
+
+      if(flight.time.contains(">>"))
+        return null;
+
       return flight;
   }
-  
 
   private Departure departureFromElements(Elements cols)
   {
@@ -70,6 +75,10 @@ public class WroclawParser implements Parser {
           flight.gate = txt;
       }
     }
+
+    if(flight.time.contains(">>"))
+      return null;
+
     return flight;
   }
 
@@ -78,10 +87,12 @@ public class WroclawParser implements Parser {
     
     List<Departure> flights = new ArrayList<Departure>();
     Elements rows = getRows(value, "table-odloty mobile");
-    for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
+    for (int i = 1; i < rows.size(); i++) {
       Element row = rows.get(i);
       Elements cols = row.select("td");
-      flights.add(departureFromElements(cols));
+      Departure dep = departureFromElements(cols);
+      if(dep != null)
+        flights.add(departureFromElements(cols));
     }
     return flights;
   }
