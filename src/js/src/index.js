@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import AirportList from './components/airport';
+import AirportList from './components/airportList';
 
 import './index.css';
 

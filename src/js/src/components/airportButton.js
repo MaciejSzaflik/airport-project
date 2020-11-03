@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from '@material-ui/core';
 import ArrivalsGrid from "./arrivalsGrid";
+import DepartureGrid from "./departureGrid";
 
 class AirportButton extends React.Component {
   constructor(props) {
@@ -10,13 +11,14 @@ class AirportButton extends React.Component {
       error: null,
       airport: props.airport,
       hasResponse: false,
+      infoType: "none",
       arrivalData: null,
       departureData: null,
     };
   }
 
   onBtnClick(type) {
-    let mainUrl = "https://infinite-brook-01188.herokuapp.com/airports/";
+    let mainUrl = "https://infinite-brook-01188.herokuapp.com/airports";
     let urlToFetch = `${mainUrl}/${type}/${this.state.airport.id}`;
     
     fetch(urlToFetch)
@@ -44,10 +46,9 @@ class AirportButton extends React.Component {
     let buttons = (
       <div>
         <Button color="primary" onClick={() =>this.onBtnClick("arrivals")}>  Arrival </Button>
-        <Button color="primary" onClick={() =>this.onBtnClick("depatures")}>  Departure</Button>
+        <Button color="primary" onClick={() =>this.onBtnClick("departures")}>  Departure</Button>
       </div>
     )
-    let table = null;
     console.log(infoType);
     console.log(hasResponse);
     if(infoType == "arrivals" && hasResponse)
@@ -59,9 +60,14 @@ class AirportButton extends React.Component {
         </div>
       )
     }
-    else (infoType == "depatures" && hasResponse)
+    else if(infoType == "departures" && hasResponse)
     {
-      table = null;
+      return (
+        <div>
+          {buttons}
+          <DepartureGrid data={items}></DepartureGrid>
+        </div>
+      )
     }
 
     return (

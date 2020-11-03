@@ -1,7 +1,7 @@
 import React from "react";
 import { DataGrid } from '@material-ui/data-grid';
 
-class ArrivalsGrid extends React.Component {
+class DepartureGrid extends React.Component {
   
   constructor(props) {
     super(props);
@@ -11,6 +11,8 @@ class ArrivalsGrid extends React.Component {
       { field: 'flightNumber', headerName: 'FLIGHT NUMBER', width: 200 },
       { field: 'airline', headerName: 'AIRLINE', width: 200 },
       { field: 'status', headerName: 'STATUS', width: 200 },
+      { field: 'checkIn', headerName: 'CHECK-IN', width: 200 },
+      { field: 'gate', headerName: 'GATE', width: 200 },
     ]
     this.state = {
       data: props.data,
@@ -27,4 +29,4 @@ class ArrivalsGrid extends React.Component {
   }
 }
 
-export default ArrivalsGrid; 
+export default DepartureGrid; 
