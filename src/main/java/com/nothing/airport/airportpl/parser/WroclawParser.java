@@ -33,6 +33,7 @@ public class WroclawParser implements Parser {
     Arrival flight = new Arrival();
       for (int j = 0; j < cols.size(); j++) {
         String txt = cols.get(j).text();
+        flight.id = j;
         switch(j) {
           case 0:
             flight.time = txt;
@@ -58,6 +59,7 @@ public class WroclawParser implements Parser {
     Departure flight = new Departure();
     for (int j = 0; j < cols.size(); j++) {
       String txt = cols.get(j).text();
+      flight.id = j;
       switch(j) {
         case 0:
           flight.time = txt;

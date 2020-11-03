@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div>
         <div>Airport List</div>
-        <AirportList />;
+        <AirportList />
     </div>
 
   );

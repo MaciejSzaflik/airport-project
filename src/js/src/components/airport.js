@@ -1,4 +1,5 @@
 import React from "react";
+import AirportButton from "./airportButton";
 
 class AirportList extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class AirportList extends React.Component {
         (result) => {
           this.setState({
             isLoaded: true,
-            items: result.items
+            items: result
           });
         },
         // Note: it's important to handle errors here
@@ -39,15 +40,17 @@ class AirportList extends React.Component {
     } else if (!isLoaded) {
       return <div>Loading...</div>
     } else {
+      this.airportList = items._embedded.airportList;
       return (
         <ul>
-          {items.map(item => (
-            <li key={item.name}>
-              {item.name}
-            </li>
-          ))}
+        {this.airportList.map(item => (
+          <li key={item.name}>
+            <div>{item.name}</div>
+            <AirportButton airport={item}/>
+          </li>
+        ))}
         </ul>
-      );
+      )
     }
   }
 }
