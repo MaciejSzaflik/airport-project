@@ -21,19 +21,19 @@ public class WroclawParser implements Parser {
     for (int i = 1; i < rows.size(); i++) { 
       Element row = rows.get(i);
       Elements cols = row.select("td");
-      Arrival arr = arrivalFromElements(cols);
+      Arrival arr = arrivalFromElements(cols,i);
       if(arr != null)
         flights.add(arr);
     }
     return flights;
   }
 
-  private Arrival arrivalFromElements(Elements cols)
+  private Arrival arrivalFromElements(Elements cols, int rowNumber)
   {
     Arrival flight = new Arrival();
       for (int j = 0; j < cols.size(); j++) {
         String txt = cols.get(j).text();
-        flight.id = j;
+        flight.id = rowNumber;
         switch(j) {
           case 0:
             flight.time = txt;
@@ -54,12 +54,12 @@ public class WroclawParser implements Parser {
       return flight;
   }
 
-  private Departure departureFromElements(Elements cols)
+  private Departure departureFromElements(Elements cols, int rowNumber)
   {
     Departure flight = new Departure();
     for (int j = 0; j < cols.size(); j++) {
       String txt = cols.get(j).text();
-      flight.id = j;
+      flight.id = rowNumber;
       switch(j) {
         case 0:
           flight.time = txt;
@@ -92,9 +92,9 @@ public class WroclawParser implements Parser {
     for (int i = 1; i < rows.size(); i++) {
       Element row = rows.get(i);
       Elements cols = row.select("td");
-      Departure dep = departureFromElements(cols);
+      Departure dep = departureFromElements(cols,i);
       if(dep != null)
-        flights.add(departureFromElements(cols));
+        flights.add(dep);
     }
     return flights;
   }
