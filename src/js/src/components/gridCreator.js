@@ -11,14 +11,21 @@ class GridCreator extends React.Component {
       infoType: "none"
     };
     props.emitter.on('flightsDataRecived', (data)=> this.createGrid(data));
+    this.arrivalGridRef = React.createRef();
+    this.departureGridRef = React.createRef();
   }
 
   createGrid(eventData)
   {
-    this.setState({
+    this.setState((state, props) => ({
       items: eventData.data,
       infoType: eventData.infoType
-    });
+    }));
+
+    if(this.arrivalGridRef!=null && eventData.infoType == "arrivals")
+      this.arrivalGridRef.current.changeData(eventData.data);
+    if(this.departureGridRef!=null && eventData.infoType == "departures")
+      this.departureGridRef.current.changeData(eventData.data);
   }
 
   render() {
@@ -28,7 +35,7 @@ class GridCreator extends React.Component {
     { 
       return (
         <div>
-          <ArrivalsGrid data={items}></ArrivalsGrid>
+          <ArrivalsGrid ref={this.arrivalGridRef} data={items}></ArrivalsGrid>
         </div>
       )
     }
@@ -36,7 +43,7 @@ class GridCreator extends React.Component {
     {
       return (
         <div>
-          <DepartureGrid data={items}></DepartureGrid>
+          <DepartureGrid ref={this.departureGridRef} data={items}></DepartureGrid>
         </div>
       )
     }

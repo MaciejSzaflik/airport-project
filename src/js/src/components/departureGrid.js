@@ -20,6 +20,12 @@ class DepartureGrid extends React.Component {
     };
   }
 
+  changeData(data) {
+    this.setState((state, props) => ({
+      data: data
+    }));
+  }
+
   render() {
     return (
       <div style={{ height: 700, width: '100%' }}>

@@ -1,7 +1,6 @@
 package com.nothing.airport.airportpl.parser;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
