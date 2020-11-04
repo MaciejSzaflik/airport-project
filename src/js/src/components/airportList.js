@@ -1,11 +1,16 @@
 import React from "react";
 import AirportButton from "./airportButton";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+
 
 class AirportList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       error: null,
+      emitter: props.emitter,
       isLoaded: false,
       items: []
     };
@@ -21,9 +26,7 @@ class AirportList extends React.Component {
             items: result
           });
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
+  
         (error) => {
           this.setState({
             isLoaded: true,
@@ -34,24 +37,38 @@ class AirportList extends React.Component {
   }
 
   render() {
-    const { error, isLoaded, items } = this.state;
+    const { error, isLoaded, items, emitter } = this.state;
+    let listItems;
     if (error) {
-      return <div>Error: {error.message}</div>
+      listItems = (
+        <ListItem button key={"Error"}>
+                <ListItemText primary={`Error: ${error.message}`} />
+        </ListItem>
+      )
     } else if (!isLoaded) {
-      return <div>Loading...</div>
+      listItems = (
+        <ListItem button key={"Loading"}>
+                <ListItemText primary={`Loading...`} />
+        </ListItem>
+      )
     } else {
       this.airportList = items._embedded.airportList;
-      return (
-        <ul>
-        {this.airportList.map(item => (
-          <li key={item.name}>
-            <div>{item.name}</div>
-            <AirportButton airport={item}/>
-          </li>
-        ))}
-        </ul>
+      listItems = (
+        this.airportList.map(item => (
+          <ListItem key={item.name}>
+            <ListItemText primary={item.name} />
+            <AirportButton airport={item} emitter={emitter}/>
+          </ListItem>
+        ))
       )
     }
+
+    return (
+      <List>
+        {listItems}
+      </List>
+    );
+
   }
 }
 

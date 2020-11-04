@@ -1,7 +1,5 @@
 import React from "react";
-import { Button } from '@material-ui/core';
-import ArrivalsGrid from "./arrivalsGrid";
-import DepartureGrid from "./departureGrid";
+import {Button} from '@material-ui/core';
 
 class AirportButton extends React.Component {
   constructor(props) {
@@ -9,6 +7,7 @@ class AirportButton extends React.Component {
 
     this.state = {
       error: null,
+      emitter: props.emitter,
       airport: props.airport,
       hasResponse: false,
       infoType: "none",
@@ -25,6 +24,12 @@ class AirportButton extends React.Component {
       .then(res => res.json())
       .then(
         (result) => {
+          this.state.emitter.emit(
+            "flightsDataRecived", {
+            infoType: type,
+            data:  result
+          });
+
           this.setState({
             hasResponse: true,
             infoType: type,
@@ -49,33 +54,12 @@ class AirportButton extends React.Component {
         <Button color="primary" onClick={() =>this.onBtnClick("departures")}>  Departure</Button>
       </div>
     )
-    console.log(infoType);
-    console.log(hasResponse);
-    if(infoType == "arrivals" && hasResponse)
-    { 
-      return (
-        <div>
-          {buttons}
-          <ArrivalsGrid data={items}></ArrivalsGrid>
-        </div>
-      )
-    }
-    else if(infoType == "departures" && hasResponse)
-    {
-      return (
-        <div>
-          {buttons}
-          <DepartureGrid data={items}></DepartureGrid>
-        </div>
-      )
-    }
-
+    
     return (
       <div>
         {buttons}
       </div>
     )
-    
   }
 }
 
