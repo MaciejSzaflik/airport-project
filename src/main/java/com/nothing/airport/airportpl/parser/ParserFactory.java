@@ -7,6 +7,8 @@ public class ParserFactory {
   {
     if(airport.getName().equalsIgnoreCase("wroclaw"))
       return new WroclawParser();
+    if(airport.getName().equalsIgnoreCase("katowice"))
+      return new KatowiceParser();
     return null;
   }
 }
