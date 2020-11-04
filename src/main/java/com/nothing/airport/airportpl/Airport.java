@@ -13,8 +13,6 @@ public class Airport {
   private String name;
   private String departuresUrl;
   private String arrivalsUrl;
-  private String departuresUrlApi;
-  private String arrivalsUrlApi;
 
   Airport() {}
 
