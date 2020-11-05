@@ -2,6 +2,7 @@ import React from "react";
 import AirportButton from "./airportButton";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import ListItemText from '@material-ui/core/ListItemText';
 
 
@@ -48,7 +49,7 @@ class AirportList extends React.Component {
     } else if (!isLoaded) {
       listItems = (
         <ListItem button key={"Loading"}>
-                <ListItemText primary={`Loading...`} />
+              <CircularProgress />
         </ListItem>
       )
     } else {

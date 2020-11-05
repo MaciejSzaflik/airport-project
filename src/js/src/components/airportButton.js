@@ -19,6 +19,7 @@ class AirportButton extends React.Component {
   onBtnClick(type) {
     let mainUrl = "https://infinite-brook-01188.herokuapp.com/airports";
     let urlToFetch = `${mainUrl}/${type}/${this.state.airport.id}`;
+    this.state.emitter.emit('loadingStarted');
     
     fetch(urlToFetch)
       .then(res => res.json())
